@@ -8,6 +8,7 @@ public class Product {
     public int ProductId { get; set; }
 
     [Display(Name="Ad")]
+    [Required]
     public string Name { get; set; } = string.Empty;
 
     [Display(Name="Qiymet")]
@@ -15,7 +16,11 @@ public class Product {
 
     [Display(Name="Resm")]
     public string Image { get; set; } = string.Empty;
+
+    [Display(Name ="Aktiv")]
     public bool IsActive { get; set; }
+
+    [Display(Name="Kateqoriya")]
     public int CategoryId { get; set; }
 
 }
