@@ -50,14 +50,14 @@ public class HomeController : Controller
     public async Task<IActionResult> Create(Product model, IFormFile imageFile)
     {
         //creating path name for upload file
-        var allowedExtensions = new[] {".jpg", ".png", ".jpeg"};
-        var extension = Path.GetExtension(imageFile.FileName);
-        var randomFileName = string.Format($"{Guid.NewGuid().ToString()}{extension}");
-        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", randomFileName);
-
+        var extension = "";
+      
 
         if(imageFile != null)
-        {
+        {        
+            var allowedExtensions = new[] {".jpg", ".png", ".jpeg"};
+            extension = Path.GetExtension(imageFile.FileName);
+
             if(!allowedExtensions.Contains(extension))
             {
                 ModelState.AddModelError("", "Uygun resm fayli secin!");
@@ -67,6 +67,10 @@ public class HomeController : Controller
 
         //Validation
         if(ModelState.IsValid && imageFile !=null){
+
+        var randomFileName = string.Format($"{Guid.NewGuid().ToString()}{extension}");
+        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", randomFileName);
+
 
         using(var stream = new FileStream(path, FileMode.Create))
         {
@@ -101,5 +105,42 @@ public class HomeController : Controller
         return View(entity);
     }
 
+
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(int id, Product model, IFormFile? imageFile)
+    {
+        
+        
+        if(id != model.ProductId)
+        {
+            return NotFound();
+        }
+
+        if(ModelState.IsValid)
+        {
+            if(imageFile != null)
+            {
+                var extension = Path.GetExtension(imageFile.FileName);
+                var randomFileName = string.Format($"{Guid.NewGuid().ToString()}{extension}");
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", randomFileName);
+
+                using(var stream = new FileStream(path, FileMode.Create))
+                {
+                    await imageFile.CopyToAsync(stream);
+                }
+
+                model.Image = randomFileName;
+            }
+            Repository.EditProduct(model);
+            return RedirectToAction("Index");
+        }
+        
+        ViewBag.Categories = new SelectList(Repository.Categories, "CategoryId", "Name");
+        return View(model);
+
+    }
+
+    
 
 }

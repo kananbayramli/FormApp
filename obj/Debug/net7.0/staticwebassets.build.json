@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "aAS0fSb5W69Lc2cLoq3wkKTSsLY/rNSzAbZ9+jeq/Ko=",
+  "Hash": "LFZ2RTeYX57eQxxi+epXOQDSbGZA0ayUeO0o7KjZ3U4=",
   "Source": "FormsApp",
   "BasePath": "_content/FormsApp",
   "Mode": "Default",
@@ -202,6 +202,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\7.png"
+    },
+    {
+      "Identity": "C:\\Users\\Kanan\\Desktop\\FormsApp\\wwwroot\\img\\7d01df02-7060-4757-bade-12ccf7c2a5d4.png",
+      "SourceId": "FormsApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Kanan\\Desktop\\FormsApp\\wwwroot\\",
+      "BasePath": "_content/FormsApp",
+      "RelativePath": "img/7d01df02-7060-4757-bade-12ccf7c2a5d4.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\7d01df02-7060-4757-bade-12ccf7c2a5d4.png"
     },
     {
       "Identity": "C:\\Users\\Kanan\\Desktop\\FormsApp\\wwwroot\\js\\site.js",
