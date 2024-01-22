@@ -47,9 +47,33 @@ public class HomeController : Controller
 
 
     [HttpPost]
-    public IActionResult Create(Product model, IFormFile imageFile)
+    public async Task<IActionResult> Create(Product model, IFormFile imageFile)
     {
+        //creating path name for upload file
+        var allowedExtensions = new[] {".jpg", ".png", ".jpeg"};
+        var extension = Path.GetExtension(imageFile.FileName);
+        var randomFileName = string.Format($"{Guid.NewGuid().ToString()}{extension}");
+        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img", randomFileName);
+
+
+        if(imageFile != null)
+        {
+            if(!allowedExtensions.Contains(extension))
+            {
+                ModelState.AddModelError("", "Uygun resm fayli secin!");
+            }
+        }
+
+
+        //Validation
         if(ModelState.IsValid){
+
+        using(var stream = new FileStream(path, FileMode.Create))
+        {
+            await imageFile.CopyToAsync(stream);
+        }
+
+        model.Image = randomFileName;
         model.ProductId = Repository.Products.Count + 1;
         Repository.CreateProduct(model);
         return RedirectToAction("Index");
