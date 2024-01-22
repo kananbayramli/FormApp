@@ -66,7 +66,7 @@ public class HomeController : Controller
 
 
         //Validation
-        if(ModelState.IsValid){
+        if(ModelState.IsValid && imageFile !=null){
 
         using(var stream = new FileStream(path, FileMode.Create))
         {
@@ -78,8 +78,28 @@ public class HomeController : Controller
         Repository.CreateProduct(model);
         return RedirectToAction("Index");
         }
-        ViewBag.Categories =new SelectList(Repository.Categories, "CategoryId", "Name");
+        ViewBag.Categories = new SelectList(Repository.Categories, "CategoryId", "Name");
         return View(model);
     }
+
+
+
+    public IActionResult Edit(int? id)
+    {
+        
+        if(id == null)
+        {
+            return NotFound();
+        }
+
+        var entity = Repository.Products.FirstOrDefault(p => p.ProductId == id);
+        if(entity == null){
+            return NotFound();
+        }
+
+        ViewBag.Categories = new SelectList(Repository.Categories, "CategoryId", "Name");
+        return View(entity);
+    }
+
 
 }
