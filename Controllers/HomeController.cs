@@ -141,6 +141,25 @@ public class HomeController : Controller
 
     }
 
+
+
+
+    public IActionResult Delete(int? id)
+    {
+        if(id == null)
+        {
+            return NotFound();
+        }
+
+        var entity = Repository.Products.FirstOrDefault(p => p.ProductId == id);
+        if(entity == null)
+        {
+            return NotFound();
+        }
+
+        Repository.DeleteProduct(entity);
+        return RedirectToAction("Index");
+    }
     
 
 }
