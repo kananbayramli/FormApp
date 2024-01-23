@@ -179,4 +179,18 @@ public class HomeController : Controller
         return RedirectToAction("Index");
     }
 
+
+    //Batch Update
+    public IActionResult EditProducts(List<Product> Products)
+    {
+        foreach(var product in Products)
+        {
+            Repository.EditProducts(product);
+        }
+
+        return RedirectToAction("Index");
+
+    }
+
+
 }

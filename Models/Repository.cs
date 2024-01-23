@@ -50,6 +50,27 @@ public class Repository{
     }
 
 
+
+   public static void EditProducts(Product updatedProduct)
+    {
+        var entity = _products.FirstOrDefault(p => p.ProductId == updatedProduct.ProductId);
+
+        if(entity != null)
+        {
+            entity.IsActive =  updatedProduct.IsActive;
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
     public static void DeleteProduct(Product deletedProduct)
     {
         var entity = _products.FirstOrDefault(p => p.ProductId == deletedProduct.ProductId);
