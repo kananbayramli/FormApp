@@ -1,0 +1,12 @@
+@model Product
+
+<div>
+    <p>
+        @Model.Name adli mehsulu silmek isteyirsinizmi?
+        <form action="" method="post">
+            <input type="hidden" asp-for="@Model.ProductId">
+            <button type="submit" class="btn btn-primary">Beli</button>
+            <a href="/" class="btn btn-danger">Xeyr</a>
+        </form>
+    </p>
+</div>
